@@ -40,9 +40,18 @@ bool consume(char *op) {
       strlen(op) != token->len ||
       memcmp(token->str, op, token->len)) {
         return false;
-      }
+  }
   token = token->next;
   return true;
+}
+
+Token *consume_ident() {
+  if (token->kind != TK_IDENT) {
+        return NULL;
+  }
+  Token *ret = token;
+  token = token->next;
+  return ret;
 }
 
 // 次のトークンが期待している記号のときには、トークンを1つ読み進める。
